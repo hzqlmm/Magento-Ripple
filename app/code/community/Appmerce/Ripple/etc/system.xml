@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Appmerce - Applications for Ecommerce
+* http://www.appmerce.com
+*
+* @extension   Ripple
+* @type        Payment method
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+*
+* @category    Magento Commerce
+* @package     Appmerce_Ripple
+* @copyright   Copyright (c) 2011-2013 Appmerce (http://www.appmerce.com)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <ripple translate="label" module="ripple">
+                    <label>Appmerce Ripple</label>
+                    <comment>
+                        <![CDATA[Free extension by <a href="http://www.appmerce.com/" title="Applications for Ecommerce" style="color: #EA7601">Appmerce</a> | <a href="http://www.appmerce.com/get-support" title="Get support for this extension" style="color: #EA7601">Get Support</a> | Make a <a href="https://ripple.com//send?to=rBdC31XbhuivNWaAvQVyTuitmS3LZNEsQj&amount=1000" style="color: #EA7601">donation</a>]]>
+                    </comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <pending_status translate="label">
+                            <label>Pending Payment Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ripple/source_pendingpayment</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </pending_status>
+                        <processing_status translate="label">
+                            <label>Processing Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </processing_status>
+                        <to_address translate="label comment">
+                            <label>Destination Account ID</label>
+                            <comment>
+                                <![CDATA[Your Ripple recipient address. Order IDs are used as destination tags. Please choose a different Ripple wallet per Magento installation.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </to_address>
+                        <expiration translate="label comment">
+                            <label>Payment Window</label>
+                            <comment>
+                                <![CDATA[Amount of time before payment window expires.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ripple/source_expiration</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </expiration>
+                        <rpc_host translate="label comment">
+                            <label>JSON-RPC Hostname</label>
+                            <comment>
+                                <![CDATA[Enter <em>s1.ripple.com</em> for default public Ripple server.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_host>
+                        <rpc_port translate="label comment">
+                            <label>JSON-RPC Port</label>
+                            <comment>
+                                <![CDATA[Enter <em>51234</em> for public Ripple server.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_port>
+                        <rpc_ptcl translate="label comment">
+                            <label>JSON-RPC SSL</label>
+                            <comment>
+                                <![CDATA[Recommended for public Ripple server.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_ptcl>
+                        <rpc_user translate="label comment">
+                            <label>JSON-RPC Username</label>
+                            <comment>
+                                <![CDATA[Leave empty for public Ripple server.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_user>
+                        <rpc_pass translate="label comment">
+                            <label>JSON-RPC Password</label>
+                            <comment>
+                                <![CDATA[Leave empty for public Ripple server.]]>
+                            </comment>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <frontend_type>obscure</frontend_type>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_pass>
+                        <debug_flag translate="label comment">
+                            <label>Debug Mode</label>
+                            <comment>
+                                <![CDATA[See database table <em>ripple_api_debug</em>.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug_flag>
+                        <order_email translate="label">
+                            <label>Send Order Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_email>
+                        <invoice_create translate="label comment">
+                            <label>Create Invoice</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </invoice_create>
+                        <invoice_email translate="label comment">
+                            <label>Send Invoice Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </invoice_email>
+                        <allowspecific translate="label">
+                            <label>Payment from Applicable Countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>150</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>160</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </specificcountry>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_order_total>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                    </fields>
+                </ripple>
+            </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Appmerce - Applications for Ecommerce
+* http://www.appmerce.com
+*
+* @extension   Ripple
+* @type        Payment method
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+*
+* @category    Magento Commerce
+* @package     Appmerce_Ripple
+* @copyright   Copyright (c) 2011-2013 Appmerce (http://www.appmerce.com)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <Appmerce_Ripple>
+            <version>1.0.0</version>
+        </Appmerce_Ripple>
+    </modules>
+    <global>
+        <models>
+            <ripple>
+                <class>Appmerce_Ripple_Model</class>
+                <resourceModel>ripple_mysql4</resourceModel>
+            </ripple>
+            <ripple_mysql4>
+                <class>Appmerce_Ripple_Model_Mysql4</class>
+                <entities>
+                    <api_debug>
+                        <table>ripple_api_debug</table>
+                    </api_debug>
+                    <api_ledger>
+                        <table>ripple_api_ledger</table>
+                    </api_ledger>
+                </entities>
+            </ripple_mysql4>
+        </models>
+        <helpers>
+            <ripple>
+                <class>Appmerce_Ripple_Helper</class>
+            </ripple>
+        </helpers>
+        <resources>
+            <ripple_setup>
+                <setup>
+                    <module>Appmerce_Ripple</module>
+                    <class>Appmerce_Ripple_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ripple_setup>
+            <ripple_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ripple_write>
+            <ripple_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ripple_read>
+        </resources>
+        <blocks>
+            <ripple>
+                <class>Appmerce_Ripple_Block</class>
+            </ripple>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <ripple>
+                    <file>appmerce/ripple/layout.xml</file>
+                </ripple>
+            </updates>
+        </layout>
+        <secure_url>
+            <ripple_api>/ripple/api</ripple_api>
+        </secure_url>
+        <routers>
+            <ripple>
+                <use>standard</use>
+                <args>
+                    <module>Appmerce_Ripple</module>
+                    <frontName>ripple</frontName>
+                </args>
+            </ripple>
+        </routers>
+        <translate>
+            <modules>
+                <Appmerce_Ripple>
+                    <files>
+                        <default>Appmerce_Ripple.csv</default>
+                    </files>
+                </Appmerce_Ripple>
+            </modules>
+        </translate>
+        <events>
+            <sales_model_service_quote_submit_after>
+                <observers>
+                    <ripple_observer>
+                        <type>singleton</type>
+                        <class>ripple/observer_submit</class>
+                        <method>sales_model_service_quote_submit_after</method>
+                    </ripple_observer>
+                </observers>
+            </sales_model_service_quote_submit_after>
+        </events>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Appmerce_Ripple>
+                    <files>
+                        <default>Appmerce_Ripple.csv</default>
+                    </files>
+                </Appmerce_Ripple>
+            </modules>
+        </translate>
+        <events>
+            <sales_order_invoice_save_before>
+                <observers>
+                    <ripple_observer>
+                        <type>singleton</type>
+                        <class>ripple/observer_invoice</class>
+                        <method>sales_order_invoice_save_before</method>
+                    </ripple_observer>
+                </observers>
+            </sales_order_invoice_save_before>
+            <sales_order_creditmemo_save_before>
+                <observers>
+                    <ripple_observer>
+                        <type>singleton</type>
+                        <class>ripple/observer_invoice</class>
+                        <method>sales_order_creditmemo_save_before</method>
+                    </ripple_observer>
+                </observers>
+            </sales_order_creditmemo_save_before>
+        </events>
+    </adminhtml>
+    <default>
+        <payment>
+            <ripple>
+                <model>ripple/api</model>
+                <title>Ripple</title>
+                <allowspecific>0</allowspecific>
+                <order_email>1</order_email>
+                <order_status>pending</order_status>
+                <pending_status>pending_payment</pending_status>
+                <processing_status>processing</processing_status>
+                <rpc_pass backend_model="adminhtml/system_config_backend_encrypted"/>
+                <rpc_ptcl>1</rpc_ptcl>
+                <rpc_port>51234</rpc_port>
+                <rpc_host>s1.ripple.com</rpc_host>
+                <expiration>3600</expiration>
+            </ripple>
+        </payment>
+    </default>
+    <crontab>
+        <jobs>
+            <ripple_status_check>
+                <schedule>
+                    <cron_expr>*/15 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>ripple/api_pull::transactionStatusCheck</model>
+                </run>
+            </ripple_status_check>
+        </jobs>
+    </crontab>
+</config>
