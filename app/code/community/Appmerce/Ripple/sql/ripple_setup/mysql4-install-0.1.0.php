@@ -39,3 +39,7 @@ CREATE TABLE `{$this->getTable('ripple/api_debug')}` (
 ");
 
 $installer->endSetup();
+
+$installer->addAttribute('order_payment', 'appmerce_response_code', array('type' => 'int'));
+
+
