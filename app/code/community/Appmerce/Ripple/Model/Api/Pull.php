@@ -126,17 +126,15 @@ class Appmerce_Ripple_Model_Api_Pull extends Varien_Object
             // Check balance etc
             $id = $row['entity_id'];
             if (isset($txs[$id])) {
-                print '<pre>';
-                print_r($txs[$id]);
                 $transactionId = $txs[$id]['hash'];
 
+                // Build order history note with link to sender
                 $note = Mage::helper('ripple')->__('Paid: %s/%s', $txs[$id]['Amount']['value'], $txs[$id]['Amount']['currency']);
                 $note .= '<br />' . Mage::helper('ripple')->__('Ledger: %s', $txs[$id]['inLedger']);
                 $note .= '<br />' . Mage::helper('ripple')->__('Account: <a href="https://ripple.com/graph/#%s">%s</a>', $txs[$id]['Account'], $txs[$id]['Account']);
 
                 // Check if full amount was received for this order
                 if (is_array($txs[$id]['Amount']) && $txs[$id]['Amount']['value'] == round($order->getGrandTotal(), 2) && $txs[$id]['Amount']['currency'] == $order->getOrderCurrencyCode()) {
-                    print 'success';
                     $this->getProcess()->success($order, $note, $transactionId);
                 }
 
@@ -149,7 +147,6 @@ class Appmerce_Ripple_Model_Api_Pull extends Varien_Object
 
         // Update last ledger index we saw
         $this->updateLedgerMin($db, $ledgerTable, $ledger_max);
-        exit ;
         return $this;
     }
 

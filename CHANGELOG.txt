@@ -1,4 +1,12 @@
 
+Appmerce Ripple for Magento Commerce, v1.8.1.0.3, 2013/12/18
+------------------------------------------------------------
+ - Cleaned up debugging code in Pull.php
+
+Appmerce Ripple for Magento Commerce, v1.8.1.0.2, 2013/12/17
+------------------------------------------------------------
+ - Re-added appmerce_response_code
+
 Appmerce Ripple for Magento Commerce, v1.8.1.0.1, 2013/12/16
 ------------------------------------------------------------
  - Initial release.
