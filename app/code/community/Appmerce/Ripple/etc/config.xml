@@ -162,7 +162,7 @@
                 <rpc_ptcl>1</rpc_ptcl>
                 <rpc_port>51234</rpc_port>
                 <rpc_host>s1.ripple.com</rpc_host>
-                <expiration>3600</expiration>
+                <expiration>900</expiration>
             </ripple>
         </payment>
     </default>
