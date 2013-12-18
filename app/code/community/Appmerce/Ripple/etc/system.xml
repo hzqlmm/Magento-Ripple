@@ -25,7 +25,7 @@
         <payment>
             <groups>
                 <ripple translate="label" module="ripple">
-                    <label>Appmerce Ripple</label>
+                    <label>Ripple (JSON-RPC)</label>
                     <comment>
                         <![CDATA[Free extension by <a href="http://www.appmerce.com/" title="Applications for Ecommerce" style="color: #EA7601">Appmerce</a> | <a href="http://www.appmerce.com/get-support" title="Get support for this extension" style="color: #EA7601">Get Support</a> | Make a <a href="https://ripple.com//send?to=rBdC31XbhuivNWaAvQVyTuitmS3LZNEsQj&amount=1000" style="color: #EA7601">donation</a>]]>
                     </comment>
