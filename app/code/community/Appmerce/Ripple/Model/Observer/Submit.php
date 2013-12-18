@@ -21,7 +21,6 @@
 
 class Appmerce_Ripple_Model_Observer_Submit
 {
-
     /*
      * Keep cart after placing order
      */
